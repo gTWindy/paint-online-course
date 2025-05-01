@@ -13,7 +13,7 @@ app.ws('/', (ws, req) => {
                 connectionHandler(ws, msg);
                 break;
             case "draw":
-                break;
+                broadcastConnection(msg);
         } 
         console.log(msg);
     })
@@ -32,7 +32,7 @@ const connectionHandler = (ws, msg) => {
 const broadcastConnection = (msg) => {
     aWss.clients.forEach(client => {
         if (client.id === msg.id){
-            client.send(JSON.stringify(msg));
+            client.send(JSON.stringify(msg ));
         }
     })
 }
